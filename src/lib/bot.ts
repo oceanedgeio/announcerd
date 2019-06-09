@@ -14,18 +14,17 @@ export default async function Connect() {
 }
 
 async function Listen(client: Client) {
-  // const guild = await GetGuild(client, process.env.SERVER_ID!);
+  const guild = await GetGuild(client, process.env.SERVER_ID!);
   const redis = new Redis();
-  // const pub = new Redis();
+  const pub = new Redis();
 
   redis.subscribe("minecraft", (err, count) => {
-    // Now we are subscribed to both the 'news' and 'music' channels.
-    // `count` represents the number of channels we are currently subscribed to.
   });
 
-  redis.on("message", (channel, message) => {
-    // Receive message Hello world! from channel news
-    // Receive message Hello again! from channel music
+  redis.on("message", async (channel, message) => {
+    const guild = await GetGuild(client, process.env.SERVER_ID!);
+    const general = await GetChannel(guild, process.env.GENERAL_CHANNEL!);
+    SendChannelMessage(general, `**${message}** has joined the server!`);
     console.log("Receive message %s from channel %s", message, channel);
   });
 }
