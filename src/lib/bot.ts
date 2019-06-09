@@ -4,7 +4,6 @@ import { GetChannel, GetGuild, SendChannelMessage } from "./helpers";
 
 import Redis from "ioredis";
 
-
 export default async function Connect() {
   const client = new Client();
 
@@ -18,13 +17,11 @@ async function Listen(client: Client) {
   const redis = new Redis();
   const pub = new Redis();
 
-  redis.subscribe("minecraft", (err, count) => {
-  });
+  redis.subscribe("minecraft", (err, count) => { return; });
 
   redis.on("message", async (channel, message) => {
-    const guild = await GetGuild(client, process.env.SERVER_ID!);
-    const debug = await GetChannel(guild, process.env.DEBUG_CHANNEL!);
-    SendChannelMessage(debug, `**${message}** has entered the server`);
+    const minecraft = await GetChannel(guild, process.env.MINECRAFT_CHANNEL!);
+    SendChannelMessage(minecraft, `**${message}** has entered the server`);
     console.log("Receive message %s from channel %s", message, channel);
   });
 }
