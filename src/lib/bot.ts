@@ -23,8 +23,8 @@ async function Listen(client: Client) {
 
   redis.on("message", async (channel, message) => {
     const guild = await GetGuild(client, process.env.SERVER_ID!);
-    const general = await GetChannel(guild, process.env.GENERAL_CHANNEL!);
-    SendChannelMessage(general, `**${message}** has joined the server!`);
+    const debug = await GetChannel(guild, process.env.DEBUG_CHANNEL!);
+    SendChannelMessage(debug, `**${message}** has entered the server`);
     console.log("Receive message %s from channel %s", message, channel);
   });
 }
