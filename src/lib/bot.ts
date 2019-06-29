@@ -1,14 +1,13 @@
-import { Client} from "discord.js";
-import moment from "moment";
-import { GetChannel, GetGuild, SendChannelMessage } from "./helpers";
-
+import { Client } from "discord.js";
 import Redis from "ioredis";
+import Moment from "moment";
+import { GetChannel, GetGuild, SendChannelMessage } from "./helpers";
 
 export default async function Connect() {
   const client = new Client();
 
   await client.login(process.env.TOKEN);
-  console.log(`Logged in at: ${moment().format("MMMM Do YYYY, h:mm:ss a")}`);
+  console.log(`Logged in at: ${Moment().format("MMMM Do YYYY, h:mm:ss a")}`);
   Listen(client);
 }
 

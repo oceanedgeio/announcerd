@@ -1,18 +1,18 @@
 import { Client, Guild, TextChannel } from "discord.js";
-import moment = require("moment");
+import Moment = require("moment");
 
 export async function GetGuild(discordClient: Client, guildId: string) {
-    const guild = await discordClient.guilds.get(guildId)!;
-    return guild;
-  }
+  const guild = await discordClient.guilds.get(guildId)!;
+  return guild;
+}
 
 export async function GetChannel(guild: Guild, channelName: string) {
-    const channel = await guild.channels.find((chan) => chan.name === channelName);
-    return channel as TextChannel;
-  }
+  const channel = await guild.channels.find((chan) => chan.name === channelName);
+  return channel as TextChannel;
+}
 
 export function SendChannelMessage(channel: TextChannel, message: string) {
   channel.send(message);
-  const timestamp = moment().format("MMMM Do YYYY, h:mm:ss a");
+  const timestamp = Moment().format("MMMM Do YYYY, h:mm:ss a");
   console.log(`${timestamp}: ${message}`);
 }
