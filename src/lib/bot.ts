@@ -4,19 +4,17 @@ import Moment from "moment";
 import { GetChannel, GetGuild, SendChannelMessage } from "./helpers";
 
 export default async function Connect() {
-  const client = new Client();
+  const discord = new Client();
+  const redis = new Redis();
+  redis.subscribe("minecraft", (err, count) => { return; });
 
-  await client.login(process.env.TOKEN);
+  await discord.login(process.env.TOKEN);
   console.log(`Logged in at: ${Moment().format("MMMM Do YYYY, h:mm:ss a")}`);
-  Listen(client);
+  Listen(discord, redis);
 }
 
-async function Listen(client: Client) {
-  const guild = await GetGuild(client, process.env.SERVER_ID!);
-  const redis = new Redis();
-  const pub = new Redis();
-
-  redis.subscribe("minecraft", (err, count) => { return; });
+async function Listen(discord: Client, redis: Redis.Redis) {
+  const guild = await GetGuild(discord, process.env.SERVER_ID!);
 
   redis.on("message", async (channel, message) => {
     const minecraft = await GetChannel(guild, process.env.MINECRAFT_CHANNEL!);
