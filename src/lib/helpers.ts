@@ -18,7 +18,7 @@ export function SendChannelMessage(channel: TextChannel, message: string) {
 }
 
 export async function SameLastMessage(channel: TextChannel, message: string) {
-  if (message === channel.lastMessage.content)
+  if (channel.lastMessage.content && message === channel.lastMessage.content)
     return true;
   return false;
 }
