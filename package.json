@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/Egeeio/gsd-discord-announcer#readme",
   "dependencies": {
-    "discord.js": "^11.5.0",
+    "discord.js": "^11.5.1",
     "ioredis": "^4.10.0",
     "moment": "^2.24.0",
     "typescript": "^3.4.5"

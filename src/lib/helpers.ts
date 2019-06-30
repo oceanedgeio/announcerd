@@ -29,7 +29,12 @@ export async function FetchChannelLastMessage(channel: TextChannel) {
 }
 
 export async function SameLastMessage(channel: TextChannel, message: string) {
-  const lastMsg = await channel.fetchMessage(channel.lastMessageID);
+  let lastMsg;
+  try {
+    lastMsg = await channel.fetchMessage(channel.lastMessageID);
+  } catch (e) {
+    console.error(e);
+  }
   if (lastMsg.content === message)
     return true;
   return false;
