@@ -1,4 +1,4 @@
-import { Client, Guild, TextChannel } from "discord.js";
+import { Client, Guild, TextChannel, GuildChannel } from "discord.js";
 import Moment = require("moment");
 
 export async function GetGuild(discordClient: Client, guildId: string) {
@@ -15,4 +15,10 @@ export function SendChannelMessage(channel: TextChannel, message: string) {
   channel.send(message);
   const timestamp = Moment().format("MMMM Do YYYY, h:mm:ss a");
   console.log(`${timestamp}: ${message}`);
+}
+
+export async function SameLastMessage(channel: TextChannel, message: string) {
+  if (message === channel.lastMessage.content)
+    return true;
+  return false;
 }

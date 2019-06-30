@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import Redis from "ioredis";
 import Moment from "moment";
-import { GetChannel, GetGuild, SendChannelMessage } from "./helpers";
+import { GetChannel, GetGuild, SameLastMessage, SendChannelMessage } from "./helpers";
 
 export default async function Connect() {
   const discord = new Client();
@@ -18,7 +18,10 @@ async function Listen(discord: Client, redis: Redis.Redis) {
 
   redis.on("message", async (channel, message) => {
     const minecraft = await GetChannel(guild, process.env.MINECRAFT_CHANNEL!);
-    SendChannelMessage(minecraft, `**${message}** has entered the server`);
-    console.log("Receive message %s from channel %s", message, channel);
+    const duplicateMessage = await SameLastMessage(channel, message);
+    if (duplicateMessage === false) {
+      SendChannelMessage(minecraft, `**${message}** has entered the server`);
+      console.log("Receive message %s from channel %s", message, channel);
+    }
   });
 }
