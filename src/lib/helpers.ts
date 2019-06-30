@@ -11,14 +11,26 @@ export async function GetChannel(guild: Guild, channelName: string) {
   return channel as TextChannel;
 }
 
-export function SendChannelMessage(channel: TextChannel, message: string) {
-  channel.send(message);
+export async function SendChannelMessage(channel: TextChannel, message: string) {
+  await channel.send(message);
   const timestamp = Moment().format("MMMM Do YYYY, h:mm:ss a");
   console.log(`${timestamp}: ${message}`);
 }
 
+export async function DeleteChannelLastMessage(channel: TextChannel) {
+  const lastMsg = await FetchChannelLastMessage(channel);
+  await lastMsg.delete();
+  return true;
+}
+
+export async function FetchChannelLastMessage(channel: TextChannel) {
+  const lastMsg = await channel.fetchMessage(channel.lastMessageID);
+  return lastMsg;
+}
+
 export async function SameLastMessage(channel: TextChannel, message: string) {
-  if (channel.lastMessage.content && message === channel.lastMessage.content)
+  const lastMsg = await FetchChannelLastMessage(channel);
+  if (lastMsg.content && message === channel.lastMessage.content)
     return true;
   return false;
 }
