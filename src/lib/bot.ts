@@ -4,12 +4,8 @@ import Moment from "moment";
 import { GetChannel, GetGuild, SameLastMessage, SendChannelMessage, NormalizeRust } from "./helpers";
 
 export default async function Connect() {
-  const connString = {
-    host: process.env.IP!,
-    port: parseInt(process.env.PORT!, 10),
-  };
   const discord = new Client();
-  const redis = new Redis(connString);
+  const redis = new Redis();
   redis.subscribe("minecraft", (err, count) => { return; });
   redis.subscribe("rust", (err, count) => { return; });
 
