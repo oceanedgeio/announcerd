@@ -40,3 +40,8 @@ export async function SameLastMessage(channel: TextChannel, message: string) {
     return true;
   return false;
 }
+
+export function NormalizeRust(message: string) {
+  const playerName = message.match(/\](.*?)\[/);
+  console.log(playerName);
+}
