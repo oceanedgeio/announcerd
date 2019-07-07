@@ -18,10 +18,10 @@ async function Listen(discord: Client, redis: Redis.Redis) {
 
   redis.on("message", async (channel, message) => {
     const announcement = `**${message}** has entered the server`;
-    const minecraft = await GetChannel(guild, process.env.MINECRAFT_CHANNEL!);
-    const duplicateMessage = await SameLastMessage(minecraft, announcement);
+    const gameChannel = await GetChannel(guild, channel);
+    const duplicateMessage = await SameLastMessage(gameChannel, announcement);
     if (duplicateMessage === false) {
-      await SendChannelMessage(minecraft, announcement);
+      await SendChannelMessage(gameChannel, announcement);
       console.log("Receive message %s from channel %s", message, channel);
     }
   });
