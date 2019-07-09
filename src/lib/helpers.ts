@@ -1,4 +1,4 @@
-import { Client, Guild, TextChannel, GuildChannel } from "discord.js";
+import { Client, Guild, TextChannel } from "discord.js";
 import Moment = require("moment");
 
 export async function GetGuild(discordClient: Client, guildId: string) {

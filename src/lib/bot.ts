@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import Redis from "ioredis";
 import Moment from "moment";
-import { GetChannel, GetGuild, SameLastMessage, SendChannelMessage, NormalizeRust } from "./helpers";
+import { GetChannel, GetGuild, NormalizeRust, SameLastMessage, SendChannelMessage } from "./helpers";
 
 export default async function Connect() {
   const discord = new Client();
