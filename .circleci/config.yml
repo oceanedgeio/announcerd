@@ -25,7 +25,7 @@ jobs:
           name: Save Packer definition
           key: packer-{{epoch}}
           paths:
-            - ~/project/docker/discord-announcer.json
+            - ~/project/docker/packer.json
       - save_cache:
           name: Save binaries for next job
           key: binaries-{{epoch}}
