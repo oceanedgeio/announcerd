@@ -49,7 +49,7 @@ jobs:
             unzip packer_1.4.2_linux_amd64.zip
       - run:
           name: Log into Docker Hub
-          command: docker login -u $username -password-stdin $password
+          command: docker login -u $username --password-stdin $password
       - run:
           name: Build discord-announcer image
           command: |
