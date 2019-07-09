@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "docker",
-      "image": "node:10",
+      "image": "node:12-alpine",
       "commit": "true",
       "changes": ["CMD [\"npm\", \"/start\"]"]
     }
@@ -15,7 +15,7 @@
     },
     {
       "type": "shell",
-      "inline": ["tar -zxf discord-announcer.tar.gz", "npm install --production"]
+      "inline": ["tar -zxf discord-announcer.tar.gz", "npm install --production", "npm run build"]
     }
   ],
   "post-processors": [

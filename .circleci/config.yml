@@ -8,9 +8,9 @@ jobs:
       - run:
           name: Install npm deps
           command: "npm install"
-      - run:
-          name: Run Tests
-          command: "npm test"
+      # - run:
+      #     name: Run Tests
+      #     command: "npm test"
       - run:
           name: Build Project
           command: "npm run build"
