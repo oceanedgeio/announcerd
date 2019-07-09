@@ -11,9 +11,9 @@ describe("SameLastMessage Function", () => {
   beforeEach(async () => {
     testMsg = "This is just a test";
     discord = new Client();
-    await discord.login("");
-    guild = await GetGuild(discord, "561304574917607424");
-    testChannel = await GetChannel(guild, "he-man");
+    await discord.login(process.env.TOKEN!);
+    guild = await GetGuild(discord, process.env.GUILDID!);
+    testChannel = await GetChannel(guild, process.env.CHANNELNAME!);
   });
   afterEach(async () => {
     await DeleteChannelLastMessage(testChannel);
