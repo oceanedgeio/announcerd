@@ -32,7 +32,7 @@ jobs:
           paths:
             - ~/project/announcer_bot.tar.gz
       - store_test_results:
-        path: test-results
+          path: test-results
   deploy:
     machine: true
     steps:
