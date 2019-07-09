@@ -2,9 +2,9 @@
   "builders": [
     {
       "type": "docker",
-      "image": "node:12-alpine",
+      "image": "node:10",
       "commit": "true",
-      "changes": ["CMD [\"node\", \"/index.js\"]"]
+      "changes": ["CMD [\"/usr/bin/node\", \"/index.js\"]"]
     }
   ],
   "provisioners": [
@@ -15,7 +15,7 @@
     },
     {
       "type": "shell",
-      "inline": ["tar -zxf discord-announcer.tar.gz", "npm install --production"]
+      "inline": ["tar -zxf discord-announcer.tar.gz", "npm install --production", "which node"]
     }
   ],
   "post-processors": [
