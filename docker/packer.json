@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type": "docker",
+      "image": "node:10",
+      "commit": "true",
+      "changes": ["CMD [\"npm\", \"/start\"]"]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "discord-announcer.tar.gz",
+      "destination": "/discord-announcer.tar.gz"
+    },
+    {
+      "type": "shell",
+      "inline": ["tar -zxf discord-announcer.tar.gz", "npm install --production"]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "egeeio/discord-announcer",
+        "tag": "latest"
+      },
+      "docker-push"
+    ]
+  ]
+}

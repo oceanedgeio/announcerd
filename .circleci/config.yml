@@ -19,18 +19,18 @@ jobs:
           command: |
             cp package.json dist
             cd dist
-            tar -czf announcer_bot.tar.gz *
-            mv announcer_bot.tar.gz ~/project
+            tar -czf discord-announcer.tar.gz *
+            mv discord-announcer.tar.gz ~/project
       - save_cache:
           name: Save Packer definition
           key: packer-{{epoch}}
           paths:
-            - ~/project/docker/announcer_bot.json
+            - ~/project/docker/discord-announcer.json
       - save_cache:
           name: Save binaries for next job
           key: binaries-{{epoch}}
           paths:
-            - ~/project/announcer_bot.tar.gz
+            - ~/project/discord-announcer.tar.gz
       - store_test_results:
           path: ./test-results
   deploy:
@@ -51,10 +51,10 @@ jobs:
           name: Log into Docker Hub
           command: docker login -u $username -password-stdin $password
       - run:
-          name: Build announcer_bot image
+          name: Build discord-announcer image
           command: |
-            ./packer validate docker/announcer_bot.json
-            ./packer build docker/announcer_bot.json
+            ./packer validate docker/packer.json
+            ./packer build docker/packer.json
 workflows:
   version: 2
   build-deploy:
