@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules && npm run clean-dist",
     "clean-npm": "rm -rf node_modules && npm install",
     "clean-dist": "rm -rf dist/* && touch dist/.gitkeep",
-    "test": "jest --runInBand --json --outputFile=./test-results/jest/results.json"
+    "test": "jest --runInBand --ci --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.4",
     "jest": "^24.8.0",
+    "jest-junit": "^6.4.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.16.0"
