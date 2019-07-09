@@ -1,8 +1,8 @@
 version: "2"
 services:
-  androgee:
+  discord-announcer:
+    environment:
+      - TOKEN=
+      - SERVER_ID=
+    image: egeeio/discord-announcer:latest
     restart: always
-    env_file:
-      - vars.env
-    build:
-      context: .
