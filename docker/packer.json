@@ -4,7 +4,7 @@
       "type": "docker",
       "image": "node:10",
       "commit": "true",
-      "changes": ["CMD [\"/usr/local/bin/node\", \"/index.js\"]"]
+      "changes": ["CMD [\"/usr/bin/tail\", \"-f\", \"/etc/hosts\"]"]
     }
   ],
   "provisioners": [
