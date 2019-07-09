@@ -31,35 +31,38 @@ jobs:
           key: binaries-{{epoch}}
           paths:
             - ~/project/announcer_bot.tar.gz
-#   deploy:
-#     machine: true
-#     steps:
-#       - restore_cache:
-#           name: Restore Packer definition
-#           key: packer-
-#       - restore_cache:
-#           name: Restore binaries
-#           key: binaries-
-#       - run:
-#           name: Download Packer
-#           command: |
-#             wget https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip
-#             unzip packer_1.2.5_linux_amd64.zip
-#       - run:
-#           name: Log into Docker Hub
-#           command: docker login -u $username -p $password
-#       - run:
-#           name: Build announcer_bot image
-#           command: |
-#             ./packer validate docker/announcer_bot.json
-#             ./packer build docker/announcer_bot.json
-# workflows:
-#   version: 2
-#   build-deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#             - build
-#           filters:
-#             branches:
+      - store_test_results:
+        path: test-results
+  deploy:
+    machine: true
+    steps:
+      - restore_cache:
+          name: Restore Packer definition
+          key: packer-
+      - restore_cache:
+          name: Restore binaries
+          key: binaries-
+      - run:
+          name: Download Packer
+          command: |
+            wget https://releases.hashicorp.com/packer/1.4.2/packer_1.4.2_linux_amd64.zip
+            unzip packer_1.4.2_linux_amd64.zip
+      - run:
+          name: Log into Docker Hub
+          command: docker login -u $username -p $password
+      - run:
+          name: Build announcer_bot image
+          command: |
+            ./packer validate docker/announcer_bot.json
+            ./packer build docker/announcer_bot.json
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

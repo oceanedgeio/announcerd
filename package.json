@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules && npm run clean-dist",
     "clean-npm": "rm -rf node_modules && npm install",
     "clean-dist": "rm -rf dist/* && touch dist/.gitkeep",
-    "test": "jest --runInBand"
+    "test": "jest --runInBand --json --outputFile=./test-results/jest/results.json"
   },
   "repository": {
     "type": "git",
