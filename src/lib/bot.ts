@@ -24,6 +24,8 @@ async function Listen(discord: Client, redis: Redis.Redis) {
     } else if (channel === "7days") {
       message = NormalizeSdtd(message);
     }
+    if (message.length === 0)
+      return;
     const announcement = `**${message}** has entered the server`;
     const gameChannel = await GetChannel(guild, channel);
     const duplicateMessage = await SameLastMessage(gameChannel, announcement);
