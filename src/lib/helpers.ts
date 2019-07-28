@@ -49,3 +49,8 @@ export function NormalizeRust(message: string) {
       return playerName.substring(1).trim();
   }
 }
+
+export function NormalizeSdtd(message: string) {
+  const sliced = message.slice(12);
+  return sliced.slice(0, -1);
+}

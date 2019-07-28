@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import Redis from "ioredis";
 import Moment from "moment";
-import { GetChannel, GetGuild, NormalizeRust, SameLastMessage, SendChannelMessage } from "./helpers";
+import { GetChannel, GetGuild, NormalizeRust, NormalizeSdtd, SameLastMessage, SendChannelMessage } from "./helpers";
 
 export default async function Connect() {
   const discord = new Client();
@@ -20,6 +20,8 @@ async function Listen(discord: Client, redis: Redis.Redis) {
   redis.on("message", async (channel, message) => {
     if (channel === "rust") {
       message = NormalizeRust(message);
+    } else if (channel === "7days") {
+      message = NormalizeSdtd(message);
     }
     const announcement = `**${message}** has entered the server`;
     const gameChannel = await GetChannel(guild, channel);
