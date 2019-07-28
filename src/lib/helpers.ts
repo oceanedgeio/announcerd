@@ -51,8 +51,8 @@ export function NormalizeRust(message: string) {
 }
 
 export function NormalizeSdtd(message: string) {
-  if (message.length > 11) {
-    const sliced = message.slice(12);
+  if (message.length > 12) {
+    const sliced = message.slice(13);
     return sliced.slice(0, -1);
   }
   return "";
