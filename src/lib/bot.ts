@@ -7,6 +7,7 @@ export default async function Connect() {
   const discord = new Client();
   const redis = new Redis();
   redis.subscribe("minecraft", (err, count) => { return; });
+  redis.subscribe("7days", (err, count) => { return; });
   redis.subscribe("rust", (err, count) => { return; });
 
   await discord.login(process.env.TOKEN);
