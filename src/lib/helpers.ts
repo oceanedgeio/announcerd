@@ -51,9 +51,7 @@ export function NormalizeRust(message: string) {
 }
 
 export function NormalizeSdtd(message: string) {
-  if (message.length > 12) {
-    const sliced = message.slice(13);
-    return sliced.slice(0, -1);
-  }
+  if (message.includes("joined"))
+    return message;
   return "";
 }
