@@ -19,14 +19,22 @@ async function Listen(discord: Client, redis: Redis.Redis) {
   const guild = await GetGuild(discord, process.env.SERVER_ID!);
 
   redis.on("message", async (channel, message) => {
-    if (channel === "rust") {
-      message = NormalizeRust(message);
-    } else if (channel === "7days") {
-      message = NormalizeSdtd(message);
+    let announcement;
+    switch (channel) {
+      case "minecraft":
+        announcement = `**${message}** has entered the server`;
+        break;
+      case "rust":
+        message = NormalizeRust(message);
+        announcement = `**${message}** has entered the server`;
+        break;
+      case "7days":
+        message = NormalizeSdtd(message);
+        announcement = message;
+        break;
+      default:
+        break;
     }
-    if (message.length === 0)
-      return;
-    const announcement = `**${message}** has entered the server`;
     const gameChannel = await GetChannel(guild, channel);
     const duplicateMessage = await SameLastMessage(gameChannel, announcement);
     if (duplicateMessage === false) {
