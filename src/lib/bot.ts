@@ -37,9 +37,11 @@ async function Listen(discord: Client, redis: Redis.Redis) {
     }
     const gameChannel = await GetChannel(guild, channel);
     const duplicateMessage = await SameLastMessage(gameChannel, announcement);
-    if (duplicateMessage === false) {
-      await SendChannelMessage(gameChannel, announcement);
-      console.log(`${channel}: ${announcement}`);
+    if (message) {
+      if (duplicateMessage === false) {
+        await SendChannelMessage(gameChannel, announcement);
+        console.log(`${channel}: ${announcement}`);
+      }
     }
   });
 }
