@@ -1,8 +1,9 @@
 {
   "name": "announcerd",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "a bot",
   "main": "./dist/index.js",
+  "files": [ "/dist" ],
   "bin": {
     "announcerd": "./dist/index.js"
   },
