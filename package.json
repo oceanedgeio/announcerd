@@ -1,6 +1,6 @@
 {
   "name": "announcerd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a bot",
   "main": "./dist/index.js",
   "bin": {

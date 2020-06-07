@@ -1,5 +1,6 @@
-import Connect from "./lib/bot";
+#!/usr/bin/env node
 
-if (!process.env.TOKEN)
-  throw new Error("Exiting - Double check your environment variables.");
-Connect();
+import Connect from './lib/bot'
+
+if (!process.env.TOKEN) { throw new Error('Exiting - Double check your environment variables.') }
+Connect()
