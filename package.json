@@ -1,10 +1,10 @@
 {
   "name": "announcerd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a bot",
   "main": "./dist/index.js",
   "bin": {
-    "log-parsed": "./dist/index.js"
+    "announcerd": "./dist/index.js"
   },
   "scripts": {
     "start": "node dist/index.js",
