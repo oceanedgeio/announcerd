@@ -42,11 +42,11 @@ export async function SameLastMessage(channel: TextChannel, message: string) {
 }
 
 export function NormalizeRust(message: string) {
-  const matches = message.match(/\](.*?)\[/);
+  const matches = message.match(/\]:(.*?)\with/);
   if (matches) {
     const playerName = matches.pop();
     if (playerName)
-      return playerName.substring(1).trim();
+      return playerName.substring(4).trim();
   }
 }
 
