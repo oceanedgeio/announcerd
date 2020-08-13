@@ -20,11 +20,10 @@ try {
   throw new Error(`Connection Error: ${error}`)
 }
 
-
 console.log(`Logged in at: ${Moment().format('MMMM Do YYYY, h:mm:ss a')}`)
 Listen(discord, redis)
 
-async function Listen(discord: Client, redis: Redis.Redis) {
+async function Listen (discord: Client, redis: Redis.Redis) {
   const guild = await GetGuild(discord, process.env.SERVER_ID!)
 
   redis.on('message', async (channel, message) => {
@@ -41,6 +40,9 @@ async function Listen(discord: Client, redis: Redis.Redis) {
         message = NormalizeSdtd(message)
         announcement = message
         break
+      case 'debug':
+        console.log(message)
+        return
       default:
         break
     }
