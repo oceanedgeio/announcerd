@@ -41,7 +41,7 @@ async function Listen (discord: Client, redis: Redis.Redis) {
         announcement = message
         break
       case 'debug':
-        console.log(message)
+        announcement = message
         return
       default:
         break
@@ -85,6 +85,7 @@ async function FetchChannelLastMessage (channel: TextChannel) {
 }
 
 async function SameLastMessage (channel: TextChannel, message: string) {
+  if (channel.name === 'debug') return
   let lastMsg
   try {
     const messages = await channel.fetchMessages({ limit: 1 })
