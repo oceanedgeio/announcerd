@@ -1,9 +1,0 @@
-version: "2"
-services:
-  discord-announcer:
-    environment:
-      - TOKEN=
-      - SERVER_ID=
-    image: egeeio/discord-announcer:latest
-    restart: always
-    network_mode: "host"
