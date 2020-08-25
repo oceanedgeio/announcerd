@@ -9,22 +9,26 @@ let discord
 let redis
 
 try {
-  const discord = new Client()
-  const redis = new Redis()
+  discord = new Client()
+  redis = new Redis({
+    host: process.env.REDIS_HOST,
+    password: process.env.REDIS_KEY
+  })
 
-  redis.subscribe('minecraft', (err, count) => { return })
-  redis.subscribe('7days', (err, count) => { return })
-  redis.subscribe('rust', (err, count) => { return })
-  discord.login(process.env.TOKEN)
+  redis.auth(process.env.REDIS_KEY!)
+  redis.subscribe('minecraft', (err, count) => { })
+  redis.subscribe('7days', (err, count) => { })
+  redis.subscribe('rust', (err, count) => { })
+  redis.subscribe('debug', (err, count) => { })
 } catch (error) {
   throw new Error(`Connection Error: ${error}`)
 }
 
-
-console.log(`Logged in at: ${Moment().format('MMMM Do YYYY, h:mm:ss a')}`)
 Listen(discord, redis)
 
-async function Listen(discord: Client, redis: Redis.Redis) {
+async function Listen (discord: Client, redis: Redis.Redis) {
+  await discord.login(process.env.TOKEN)
+  console.log(`Logged in at: ${Moment().format('MMMM Do YYYY, h:mm:ss a')}`)
   const guild = await GetGuild(discord, process.env.SERVER_ID!)
 
   redis.on('message', async (channel, message) => {
@@ -39,6 +43,9 @@ async function Listen(discord: Client, redis: Redis.Redis) {
         break
       case '7days':
         message = NormalizeSdtd(message)
+        announcement = message
+        break
+      case 'debug':
         announcement = message
         break
       default:
@@ -83,6 +90,7 @@ async function FetchChannelLastMessage (channel: TextChannel) {
 }
 
 async function SameLastMessage (channel: TextChannel, message: string) {
+  if (channel.name === 'debug') return false
   let lastMsg
   try {
     const messages = await channel.fetchMessages({ limit: 1 })
@@ -90,8 +98,7 @@ async function SameLastMessage (channel: TextChannel, message: string) {
   } catch (e) {
     console.error(e)
   }
-  if (lastMsg && lastMsg.content === message)
-    return true
+  if (lastMsg && lastMsg.content === message) { return true }
   return false
 }
 
@@ -99,13 +106,11 @@ function NormalizeRust (message: string) {
   const matches = message.match(/\](.*?)\[/)
   if (matches) {
     const playerName = matches.pop()
-    if (playerName)
-      return playerName.substring(1).trim()
+    if (playerName) { return playerName.substring(1).trim() }
   }
 }
 
 function NormalizeSdtd (message: string) {
-  if (message.includes('joined'))
-    return message
+  if (message.includes('joined')) { return message }
   return ''
 }
