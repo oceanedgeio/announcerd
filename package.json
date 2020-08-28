@@ -31,8 +31,7 @@
   "dependencies": {
     "discord.js": "^11.6.4",
     "ioredis": "^4.17.3",
-    "moment": "^2.27.0",
-    "typescript": "^3.9.7"
+    "moment": "^2.27.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -52,6 +51,7 @@
     "jest": "^26.4.0",
     "jest-junit": "^6.4.0",
     "ts-jest": "^26.2.0",
-    "ts-node": "^8.10.2"
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   }
 }
