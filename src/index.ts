@@ -38,7 +38,6 @@ async function Listen (discord: Client, redis: Redis.Redis) {
         announcement = `**${message}** has entered the server`
         break
       case 'rust':
-        message = NormalizeRust(message)
         announcement = `**${message}** has entered the server`
         break
       case '7days':
@@ -100,14 +99,6 @@ async function SameLastMessage (channel: TextChannel, message: string) {
   }
   if (lastMsg && lastMsg.content === message) { return true }
   return false
-}
-
-function NormalizeRust (message: string) {
-  const matches = message.match(/\](.*?)\[/)
-  if (matches) {
-    const playerName = matches.pop()
-    if (playerName) { return playerName.substring(1).trim() }
-  }
 }
 
 function NormalizeSdtd (message: string) {
