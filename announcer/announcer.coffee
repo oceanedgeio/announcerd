@@ -11,13 +11,21 @@ connect_redis = () ->
         password: process.env.REDIS_KEY
     })
     redis.auth(process.env.REDIS_KEY)
+    return redis
 
 connect_discord = () ->
     discord = new Discord.Client()
     discord.login(process.env.TOKEN)
-
+    return discord
 try
-    connect_redis()
-    connect_discord()
+    redis = connect_redis()
+    discord = connect_discord()
+    for game in supported_games
+        redis.subscribe(game)
+
 catch error
     throw new Error("Something Happen: #{error}")
+
+
+discord.on('ready', () ->
+    console.log('yeet'))
