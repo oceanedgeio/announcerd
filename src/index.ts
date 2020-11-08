@@ -12,7 +12,8 @@ try {
   discord = new Client()
   redis = new Redis({
     host: process.env.REDIS_HOST,
-    password: process.env.REDIS_KEY
+    password: process.env.REDIS_KEY,
+    port: parseInt(process.env.REDIS_PORT!)
   })
 
   redis.auth(process.env.REDIS_KEY!)
