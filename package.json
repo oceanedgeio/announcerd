@@ -1,6 +1,6 @@
 {
   "name": "announcerd",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "It's announcerd",
   "main": "./dist/index.js",
   "files": [
@@ -10,7 +10,7 @@
     "announcerd": "./dist/index.js"
   },
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "node_modules/.bin/ts-node src/index.ts",
     "build": "node_modules/.bin/tsc --build tsconfig.json",
     "rebuild": "npm run clean-npm && npm run clean-dist && npm run build",
     "clean": "rm -rf node_modules && npm run clean-dist",
@@ -51,7 +51,6 @@
     "jest": "^26.4.0",
     "jest-junit": "^6.4.0",
     "ts-jest": "^26.2.0",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "ts-node": "^8.10.2"
   }
 }
