@@ -5,6 +5,7 @@ import Moment from 'moment'
 import { Client, Guild, TextChannel } from 'discord.js'
 
 if (!process.env.REDIS_HOSTNAME) { throw new Error('Redis HOSTNAME not found - Double check your environment variables.') }
+if (!process.env.REDIS_PORT) { throw new Error('Redis PORT not found - Double check your environment variables.') }
 if (!process.env.TOKEN) { throw new Error('Discord TOKEN not found - Double check your environment variables.') }
 if (!process.env.SERVER_ID) { throw new Error('Discord SERVER ID not found - Double check your environment variables.') }
 
@@ -14,7 +15,8 @@ let redis
 try {
   discord = new Client()
   redis = new Redis({
-    host: process.env.REDIS_HOSTNAME
+    host: process.env.REDIS_HOSTNAME,
+    port: process.env.REDIS_PORT,
   })
 
   redis.subscribe('minecraft', (err, count) => { })
