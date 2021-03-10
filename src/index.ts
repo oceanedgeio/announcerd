@@ -16,7 +16,7 @@ try {
   discord = new Client()
   redis = new Redis({
     host: process.env.REDIS_HOSTNAME,
-    port: process.env.REDIS_PORT,
+    port: parseInt(process.env.REDIS_PORT),
   })
 
   redis.subscribe('minecraft', (err, count) => { })
